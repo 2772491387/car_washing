@@ -36,6 +36,17 @@ function normalizeBooking(body) {
   return booking;
 }
 
+function getBearerToken(req) {
+  const auth = req.headers.authorization || "";
+  const prefix = "Bearer ";
+
+  if (!auth.startsWith(prefix)) {
+    return "";
+  }
+
+  return auth.slice(prefix.length).trim();
+}
+
 async function create(req, res, { readJson, sendJson }) {
   const body = await readJson(req);
   const booking = createBooking(normalizeBooking(body));
@@ -47,6 +58,11 @@ async function create(req, res, { readJson, sendJson }) {
 }
 
 function list(req, res, { sendJson }) {
+  if (!process.env.ADMIN_TOKEN || getBearerToken(req) !== process.env.ADMIN_TOKEN) {
+    sendJson(res, 401, { message: "Unauthorized" });
+    return;
+  }
+
   sendJson(res, 200, {
     data: getRecentBookings()
   });

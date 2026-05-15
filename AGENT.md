@@ -12,6 +12,9 @@
 - `server/app.js` 是 Node 后端入口，使用内置 HTTP 模块托管静态页面和挂载 API。
 - `server/routes/` 存放 API 路由，目前包含健康检查和预约接口骨架。
 - `server/db/bookingsRepository.js` 使用 Node 内置 SQLite 保存预约数据，默认数据库在 `server/data/bookings.sqlite`。
+- `functions/api/` 是 Cloudflare Pages Functions 线上接口目录，部署到 Cloudflare 后会接管 `/api/*`。
+- `schema.sql` 是 Cloudflare D1 的建表 SQL。
+- `CLOUDFLARE.md` 记录免费部署到 Cloudflare Pages + D1 的后台配置步骤。
 - 页面可以通过 `npm run dev` 或 `npm start` 启动后访问；当前版本不依赖第三方 npm 包。
 
 ## Page Sections
@@ -40,4 +43,6 @@
 - 后端依赖 Node.js，npm 在 PowerShell 下如遇脚本策略限制，可以使用 `npm.cmd`。
 - 之前尝试安装 Express 依赖时受限于沙箱网络审批，因此当前环境采用零依赖 Node 服务；后续需要数据库或中间件时再引入依赖。
 - 预约数据属于运行数据，不要提交 `server/data/` 下的 SQLite 数据库文件。
+- Cloudflare D1 绑定名必须保持为 `DB`，否则线上 `/api/bookings` 无法访问数据库。
+- `GET /api/bookings` 会返回手机号等敏感信息，必须通过 `ADMIN_TOKEN` 鉴权；公开页面只使用 `POST /api/bookings`。
 - 本项目没有外部依赖，尽量不要引入框架或复杂构建流程，除非需求明显升级。

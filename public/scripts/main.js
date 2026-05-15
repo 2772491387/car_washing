@@ -85,9 +85,11 @@
           throw new Error("预约提交失败");
         }
 
-        formMessage.textContent = "预约已提交，门店稍后联系确认。";
+        const result = await response.json().catch(() => ({}));
+        const bookingId = result.data && result.data.id ? ` 编号：${result.data.id}` : "";
+        formMessage.textContent = `预约已提交，门店稍后联系确认。${bookingId}`;
         bookingForm.reset();
       } catch (error) {
-        formMessage.textContent = "请通过本地服务打开页面后再提交预约。";
+        formMessage.textContent = "预约提交失败，请稍后重试或联系门店。";
       }
     });
