@@ -1,0 +1,15 @@
+{
+  "name": "car-washing-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A car washing and auto detailing website with a lightweight Node backend.",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "node server/app.js",
+    "dev": "node --watch server/app.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=20"
+  }
+}

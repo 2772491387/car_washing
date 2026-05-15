@@ -65,8 +65,29 @@
       });
     });
 
-    bookingForm.addEventListener("submit", (event) => {
+    bookingForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      formMessage.textContent = "预约已记录，门店稍后联系确认。";
-      bookingForm.reset();
+      formMessage.textContent = "正在提交预约...";
+
+      const formData = new FormData(bookingForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error("预约提交失败");
+        }
+
+        formMessage.textContent = "预约已提交，门店稍后联系确认。";
+        bookingForm.reset();
+      } catch (error) {
+        formMessage.textContent = "请通过本地服务打开页面后再提交预约。";
+      }
     });
