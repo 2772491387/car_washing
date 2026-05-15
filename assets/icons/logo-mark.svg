@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">澄镜汽车洗护标志</title>
+  <desc id="desc">简约深色方形标志，配有清洁光带</desc>
+  <rect width="64" height="64" rx="14" fill="#161a1d"/>
+  <circle cx="24" cy="22" r="10" fill="#0f8f8c"/>
+  <path d="M17 42c12-10 25-10 36 0" fill="none" stroke="#f7f8f5" stroke-width="5" stroke-linecap="round"/>
+  <path d="M21 48h28" fill="none" stroke="#d85f49" stroke-width="4" stroke-linecap="round"/>
+</svg>

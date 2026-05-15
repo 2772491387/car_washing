@@ -1,0 +1,21 @@
+# Local browser/debug profiles
+.edge-profile/
+
+# Temporary previews and scratch output
+preview-*.png
+*.tmp
+*.temp
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+
+# Dependency/build folders if the project is later expanded
+node_modules/
+dist/
+build/
+.cache/
